@@ -1,0 +1,16 @@
+<LINE> = STATEMENT | LPARTIAL | OB | CB | ARRAY | ENDARRAY | NULL
+STATEMENT = <WS*> LVAL <EQ> RVAL
+ARRAY = <WS*> LVAL <EQ> ARVAL
+LPARTIAL =  <WS*> LVAL <EQ>
+EQ = "="
+<WS> = #"\s"
+<LB> = "\n"
+OB = <WS>* "{"
+CB = <WS>* "}"
+LVAL = TOKEN
+RVAL = STRING | TOKEN
+<STRING> =  <"\""> (TOKEN | WS)* <"\"">
+<TOKEN> = #"[^=\"\n\s}}]+" 
+ARVAL = <"{"> (<WS>* TOKEN <WS>*)* <"}">
+ENDARRAY = (<WS>* TOKEN <WS>*)+ <"}">
+NULL = eps
